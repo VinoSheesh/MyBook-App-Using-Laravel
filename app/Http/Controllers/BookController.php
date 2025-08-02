@@ -13,7 +13,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-        return view('books.index', ['books' => $books]);
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -59,7 +59,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        return view('books.edit');
+        $book = Book::findOrFail($id);
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -67,7 +68,22 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'judul' => 'required',
+            'penulis' => 'required',
+            'tahun_terbit' => 'required|integer|digits:4',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        $book = Book::findOrFail($id);
+        $book->update([
+            'judul' => $request->judul,
+            'penulis' => $request->penulis,
+            'tahun_terbit' => $request->tahun_terbit,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->route('buku.index')->with('success', 'Book updated successfully.');
     }
 
     /**

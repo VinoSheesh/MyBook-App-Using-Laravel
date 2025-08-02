@@ -20,7 +20,7 @@
             width: 100%;
             border-collapse: collapse;
             background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -70,18 +70,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ( $books as $book )
+            @foreach ($books as $book)
                 <tr>
                     <td>{{ $book->judul }}</td>
                     <td>{{ $book->penulis }}</td>
                     <td>{{ $book->tahun_terbit }}</td>
                     <td>{{ $book->deskripsi }}</td>
+                    <td>
+                        <a href="{{ route('buku.edit', $book->id) }}">Edit</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-  <a href={{ route('buku.create') }}>Create</a>
+    <a href={{ route('buku.create') }}>Create</a>
 </body>
 
 </html>
