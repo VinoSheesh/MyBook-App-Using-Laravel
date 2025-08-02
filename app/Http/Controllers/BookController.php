@@ -36,7 +36,12 @@ class BookController extends Controller
             'deskripsi' => 'nullable|string',
         ]);
 
-        Book::create($request->all());
+        Book::create([
+            'judul' => $request->judul,
+            'penulis' => $request->penulis,
+            'tahun_terbit'=> $request->tahun_terbit,
+            'deskripsi' => $request->deskripsi,
+        ]);
 
         return redirect()->route('buku.index')->with('success', 'Book created successfully.');
     }
