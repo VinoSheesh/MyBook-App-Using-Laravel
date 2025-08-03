@@ -32,7 +32,7 @@
         <textarea name="deskripsi" id=""></textarea><br><br>
         @error('deskripsi')
             <div style="color:red;">{{ $message }}</div>
-        @enderro
+        @enderror
 
         <button type="submit">Simpan</button>
     </form>
